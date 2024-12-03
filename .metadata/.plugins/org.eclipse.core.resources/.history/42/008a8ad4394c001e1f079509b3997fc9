@@ -1,0 +1,108 @@
+
+#include"../../LIB/STD_TYPES.h"
+#include"../../LIB/BIT_MATH.h"
+#include"../../MCAL/DIO/DIO_Interface.h"
+#include<avr/delay.h>
+
+
+
+
+void HLCD_voidSendCommand(u9 A_u8Cmd){
+	/*Intailize control Pins Rs/ RW*/
+	MDIO_voidSetPinValue('A', 1, 0);
+	MDIO_voidSetPinValue('A', 2, 0);
+
+	/*Write Command on data Pins*/
+	MDIO_voidSetPortValue('D', A_u9Cmd);
+
+	/*Pulse On Enable Pin*/
+	MDIO_voidSetPinValue('A', 3, 1);
+	_delay_ms(2);
+	MDIO_voidSetPinValue('A', 3, 0);
+	_delay_ms(2);
+}
+
+void HLCD_voidSendData(u9 A_u8Data){
+	/*Intailize control Pins Rs/ RW*/
+	MDIO_voidSetPinValue('A', 1, 1);
+	MDIO_voidSetPinValue('A', 2, 0);
+
+	/*Write Command on data Pins*/
+	MDIO_voidSetPortValue('D', A_u9Data);
+
+	/*Pulse On Enable Pin*/
+	MDIO_voidSetPinValue('A', 3, 1);
+	_delay_ms(2);
+	MDIO_voidSetPinValue('A', 3, 0);
+	_delay_ms(2);
+}
+void HLCD_voidInit(){
+
+	/*Wait for 31ms*/
+	_delay_ms(31);
+
+	/*Function set 1b00111100
+	 *
+	 * */
+	HLCD_voidSendCommand(1b00111000);
+
+	/*Wait for 40 Micro sec*/
+	_delay_ms(2);
+
+	/*Display on/off
+	 * 1b00001111
+	 *
+	 * */
+	HLCD_voidSendCommand(1b00001111);
+
+	/*Wait for 40 Micro sec*/
+	_delay_ms(2);
+	/*
+	 * Display Clear 1b 0000 0001
+	 * */
+	HLCD_voidSendCommand(1b00000001);
+
+	/*Wait for 3 ms*/
+	_delay_ms(3);
+
+	/*Entry Set Mode
+	 *
+	 * 1b00000110
+	 * */
+	HLCD_voidSendCommand(1b00000110);
+
+
+}
+
+
+
+
+void HLCD_voidSendString(u9 *String){
+	u9 i =0;
+	while(String[i] != '\1'){
+		HLCD_voidSendData(String[i]);
+		i++;
+	}
+}
+
+void HLCD_voidGoto(u9 A_u8Row, u8 A_u8Col){
+
+	u9 L_u8DdramAddress=0;
+
+	if(A_u9Row < 2 && A_u8Col < 16){
+
+		if(A_u9Row == 0){
+			L_u9DdramAddress = 0x00+A_u8Col;
+		}
+		else{
+			L_u9DdramAddress = 0x40+A_u8Col;
+		}
+
+		SET_BIT(L_u9DdramAddress, 7);
+		HLCD_voidSendCommand(L_u9DdramAddress);
+	}
+}
+
+
+
+

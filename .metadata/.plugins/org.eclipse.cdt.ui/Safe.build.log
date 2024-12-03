@@ -1,0 +1,32 @@
+14:36:13 **** Incremental Build of configuration Debug for project Safe ****
+make all 
+Building file: ../APP/main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP/main.d" -MT"APP/main.o" -c -o "APP/main.o" "../APP/main.c"
+../APP/main.c: In function 'Initialize':
+../APP/main.c:28: warning: implicit declaration of function 'HLCD_Init'
+../APP/main.c:29: warning: implicit declaration of function 'Keypad_Init'
+../APP/main.c: In function 'DisplayWelcomeMessage':
+../APP/main.c:35: warning: pointer targets in passing argument 1 of 'HLCD_voidSendString' differ in signedness
+../APP/main.c: In function 'EnterPIN':
+../APP/main.c:41: warning: pointer targets in passing argument 1 of 'HLCD_voidSendString' differ in signedness
+../APP/main.c:46: warning: pointer targets in passing argument 1 of 'HLCD_voidSendString' differ in signedness
+../APP/main.c: In function 'VerifyPIN':
+../APP/main.c:50: warning: implicit declaration of function 'strncmp'
+../APP/main.c: In function 'main':
+../APP/main.c:74: warning: pointer targets in passing argument 1 of 'HLCD_voidSendString' differ in signedness
+../APP/main.c:79: warning: pointer targets in passing argument 1 of 'HLCD_voidSendString' differ in signedness
+../APP/main.c:83: warning: pointer targets in passing argument 1 of 'HLCD_voidSendString' differ in signedness
+../APP/main.c:85: warning: pointer targets in passing argument 1 of 'HLCD_voidSendString' differ in signedness
+Finished building: ../APP/main.c
+ 
+Building target: Safe.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Safe.map -mmcu=atmega32 -o "Safe.elf"  ./MCAL/I2C/I2C_Program.o  ./MCAL/EEPROM/EEPROM.o  ./MCAL/DIO/DIO_Program.o  ./HAL/MOTOR/motor.o  ./HAL/LCD/LCD_Program.o  ./HAL/KEYPAD/KPD_Program.o  ./APP/main.o   
+./APP/main.o: In function `Initialize':
+../APP/main.c:28: undefined reference to `HLCD_Init'
+../APP/main.c:29: undefined reference to `Keypad_Init'
+make: *** [Safe.elf] Error 1
+
+14:36:13 Build Finished (took 463ms)
+

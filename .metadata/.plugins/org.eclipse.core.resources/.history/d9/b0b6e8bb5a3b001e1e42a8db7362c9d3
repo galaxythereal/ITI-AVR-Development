@@ -1,0 +1,39 @@
+/*
+ * main.c
+ *
+ *  Created on: Aug 15, 2023
+ *      Author: Mahmoud Ezzat
+ */
+
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+const uint8_t segmentPatterns[6] = {
+ 0b00000010,
+ 0b00000100,
+ 0b00001000,
+ 0b00010000,
+ 0b00100000,
+ 0b01000000
+};
+
+int main(void) {
+
+    DDRA = 0xFF;
+
+    while (1) {
+
+        for (uint8_t i = 0; i < 6; i++) {//makes led blink from pin 1 to pin 6
+            PORTA = segmentPatterns[i];
+            _delay_ms(sizeof(segmentPatterns)*i*i*i+100);//just random values but i wanted it to vary with the position of the element in the array
+
+        }
+        for (uint8_t i = 6; i > 0; i--) {//makes led blink from pin 6 to pin 1
+                   PORTA = segmentPatterns[i];
+                   _delay_ms(sizeof(segmentPatterns)*i*i*i+100);
+               }
+    }
+
+    return 0;
+}

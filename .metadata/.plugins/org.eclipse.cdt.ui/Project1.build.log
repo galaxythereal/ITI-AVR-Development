@@ -1,0 +1,10 @@
+19:25:19 **** Incremental Build of configuration Debug for project Project1 ****
+make all 
+Building target: Project1.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,Project1.map -mmcu=atmega16 -o "Project1.elf"  ./test.o   
+d:/downloads/imt_sdk_win_64/winavr/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm16.o:(.init9+0x0): undefined reference to `main'
+make: *** [Project1.elf] Error 1
+
+19:25:20 Build Finished (took 161ms)
+

@@ -1,0 +1,75 @@
+#include"../../LIB/STD_TYPES.h"
+#include"../../LIB/BIT_MATH.h"
+#include<avr/io.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include "ultrasonic.h"
+#include "../LCD/LCD.h"
+#include "../../MCAL/EXTI/EXTI_Interface.h"
+#include "../../MCAL/GIE/GIE_Interface.h"
+#include "../../MCAL/TIMER/Timer_Interface.h"
+#include "../Servo/servo.h"
+u8 sensor_working=0;
+u8 rising_edge=0;
+u32 timer_counter=0;
+u32 distance;
+u8 distance_str[10];
+
+
+void HSNC_voidInit(void){
+
+  TRIGGER_DDR|=(1<<TRIGGER);
+  ECHO_DDR&=~(1<<ECHO);
+  ECHO_PULLUP|=(1<<ECHO);
+  MEXTI_voidSenseControl(1,1);
+  MEXTI_voidEnable(1);
+  MTimer_voidTimerInit(0);
+  return;
+}
+
+
+
+void HSNC_voidTrigger(void){
+  if(!sensor_working){
+    TRIGGER_PORT|=(1<<TRIGGER);
+    _delay_us(15);
+    TRIGGER_PORT&=~(1<<TRIGGER);
+    sensor_working=1;
+  }
+}
+
+ISR(INT1_vect){
+  if(sensor_working==1){
+    if(rising_edge==0){
+      TCNT0=0x00;
+      rising_edge=1;
+      timer_counter=0;
+    }
+  else{
+    distance=(timer_counter*256+TCNT0)/466;
+    HLCD_voidGoTo(1,0);
+  	itoa(distance,distance_str,10);
+  	strcat(distance_str, " cm ");
+  	HLCD_voidSendString(distance_str);
+  	_delay_ms(40);
+    timer_counter=0;
+    rising_edge=0;
+//    if (distance == 200) {
+//    	HSER_voidInit ();
+//    	HSER_voidRotate90();
+//
+//               }
+
+  }
+}}
+
+
+ISR(TIMER0_OVF_vect){
+    timer_counter++;
+    if(timer_counter >730){
+      TCNT0=0x00;
+      sensor_working=0;
+      rising_edge=0;
+      timer_counter=0;
+    }
+}

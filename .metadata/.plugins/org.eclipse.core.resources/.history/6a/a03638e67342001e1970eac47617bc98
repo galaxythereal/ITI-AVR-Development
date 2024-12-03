@@ -1,0 +1,55 @@
+
+
+#include"../LIB/STD_TYPES.h"
+#include"../LIB/BIT_MATH.h"
+#include"../MCAL/DIO/DIO_Interface.h"
+
+#include<avr/delay.h>
+#include"../MCAL/GIE/GIE_Interface.h"
+#include"../MCAL/EXTI/EXTI_Interface.h"
+#include"../MCAL/ADC/ADC_Interface.h"
+#include"../MCAL/Timer/Timer_Interface.h"
+#include<avr/interrupt.h>
+
+
+
+u16 G_u16Counter = 0;
+
+
+int main(){
+
+	MDIO_voidSetPinDirection('C', 0, 1);
+
+	/*
+	 * Global Interrupt Enable
+	 * */
+	MGIE_voidEnable();
+
+	MTimer_voidTimerInit(0);
+	MTimer_voidSetPreloadValue(0, 192);
+
+	MTimer_voidStart();
+
+
+	while(1){
+
+
+
+	}
+}
+
+ISR(TIMER0_OVF_vect){
+	G_u16Counter++;
+	if(G_u16Counter == 3907){
+		if(MDIO_u8GetPinValue('C',0) == 0)
+			MDIO_voidSetPinValue('C', 0,1);
+		else
+			MDIO_voidSetPinValue('C', 0,0);
+
+		G_u16Counter = 0;
+		MTimer_voidSetPreloadValue(0, 192);
+	}
+}
+
+
+

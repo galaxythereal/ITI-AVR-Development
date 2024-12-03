@@ -1,0 +1,13 @@
+/*
+ * EEPROM.h
+ *
+ *  Created on: Sep 5, 2023
+ *      Author: Mahmoud Ezzat
+ */
+
+#ifndef MCAL_EEPROM_EEPROM_H_
+#define MCAL_EEPROM_EEPROM_H_
+
+
+
+#endif /* MCAL_EEPROM_EEPROM_H_ */

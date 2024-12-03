@@ -1,0 +1,20 @@
+
+#include "../../LIB/STD_TYPES.h"
+#include "../../LIB/BIT_MATH.h"
+#ifndef EEPROM_DRIVER_H
+#define EEPROM_DRIVER_H
+
+#include "I2C_Interface.h"
+
+// EEPROM initialization function
+void EEPROM_Init();
+
+// Function to write a byte to a specified address in EEPROM
+// Returns the error status (TWI_ErrStatus)
+TWI_ErrStatus EEPROM_WriteByte(u16 address, u8 data);
+
+// Function to read a byte from a specified address in EEPROM
+// Returns the error status (TWI_ErrStatus)
+TWI_ErrStatus EEPROM_ReadByte(u16 address, u8 *data);
+
+#endif /* EEPROM_DRIVER_H */

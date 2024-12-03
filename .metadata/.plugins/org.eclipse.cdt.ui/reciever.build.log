@@ -1,0 +1,38 @@
+16:44:56 **** Incremental Build of configuration Debug for project reciever ****
+make all 
+Building file: ../APP/main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP/main.d" -MT"APP/main.o" -c -o "APP/main.o" "../APP/main.c"
+Finished building: ../APP/main.c
+ 
+Building target: reciever.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,reciever.map -mmcu=atmega32 -o "reciever.elf"  ./MCAL/UART/UART_Program.o  ./MCAL/TIMER/TIMER_Program.o  ./MCAL/GIE/GIE_Program.o  ./MCAL/EXTI/EXTI_Program.o  ./MCAL/DIO/DIO_Program.o  ./MCAL/ADC/ADC_Program.o  ./HAL/MOTOR/motor.o  ./HAL/LCD/LCD_Program.o  ./HAL/KEYPAD/KPD_Program.o  ./APP/main.o   
+Finished building target: reciever.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S reciever.elf  >"reciever.lss"
+Finished building: reciever.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex reciever.elf  "reciever.hex"
+Finished building: reciever.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 reciever.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    9946 bytes (30.4% Full)
+(.text + .data + .bootloader)
+
+Data:         24 bytes (1.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+16:44:57 Build Finished (took 788ms)
+

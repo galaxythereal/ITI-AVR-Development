@@ -1,0 +1,38 @@
+14:23:15 **** Incremental Build of configuration Debug for project Calculator ****
+make all 
+Building file: ../APP/main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP/main.d" -MT"APP/main.o" -c -o "APP/main.o" "../APP/main.c"
+../APP/main.c:1:33: error: ../../LIB/STD_TYPES.h: No such file or directory
+../APP/main.c:2:32: error: ../../LIB/BIT_MATH.h: No such file or directory
+../APP/main.c:3:42: error: ../../MCAL/DIO/DIO_Interface.h: No such file or directory
+../APP/main.c:4:31: error: ../../HAL/LCD/LCD.h: No such file or directory
+../APP/main.c:5:27: error: KPD_Interface.h: No such file or directory
+../APP/main.c:11: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'G_u8KeyPadButtons'
+../APP/main.c: In function 'HKPD_voidInit':
+../APP/main.c:20: error: 'u8' undeclared (first use in this function)
+../APP/main.c:20: error: (Each undeclared identifier is reported only once
+../APP/main.c:20: error: for each function it appears in.)
+../APP/main.c:20: error: expected ';' before 'col'
+../APP/main.c:20: error: 'col' undeclared (first use in this function)
+../APP/main.c:21: warning: implicit declaration of function 'MDIO_voidSetPinDirection'
+../APP/main.c:23: error: expected ';' before 'row'
+../APP/main.c:23: error: 'row' undeclared (first use in this function)
+../APP/main.c:25: warning: implicit declaration of function 'MDIO_voidSetPinValue'
+../APP/main.c: In function 'main':
+../APP/main.c:31: warning: implicit declaration of function 'HLCD_voidInit'
+../APP/main.c:42: error: 'u8' undeclared (first use in this function)
+../APP/main.c:42: error: expected ';' before 'pressedKey'
+../APP/main.c:44: error: 'pressedKey' undeclared (first use in this function)
+../APP/main.c:47: warning: implicit declaration of function 'HLCD_voidSendData'
+../APP/main.c:48: warning: implicit declaration of function 'strlen'
+../APP/main.c:48: warning: incompatible implicit declaration of built-in function 'strlen'
+../APP/main.c:53: warning: incompatible implicit declaration of built-in function 'strlen'
+../APP/main.c:54: warning: implicit declaration of function 'custom_atoi'
+../APP/main.c:60: warning: incompatible implicit declaration of built-in function 'strlen'
+../APP/main.c:77: warning: implicit declaration of function 'HLCD_voidSendString'
+../APP/main.c:93: warning: implicit declaration of function 'HLCD_voidClearScreen'
+make: *** [APP/main.o] Error 1
+
+14:23:15 Build Finished (took 445ms)
+

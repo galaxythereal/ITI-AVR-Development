@@ -1,0 +1,38 @@
+15:17:27 **** Incremental Build of configuration Debug for project EXTI_Driver ****
+make all 
+Building file: ../APP/main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP/main.d" -MT"APP/main.o" -c -o "APP/main.o" "../APP/main.c"
+Finished building: ../APP/main.c
+ 
+Building target: EXTI_Driver.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,EXTI_Driver.map -mmcu=atmega32 -o "EXTI_Driver.elf"  ./MCAL/GIE/GIE_Program.o  ./MCAL/EXTI/EXTI_Program.o  ./MCAL/DIO/DIO_Program.o  ./HAL/MOTOR/motor.o  ./HAL/LCD/LCD_Program.o  ./APP/main.o   
+Finished building target: EXTI_Driver.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S EXTI_Driver.elf  >"EXTI_Driver.lss"
+Finished building: EXTI_Driver.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -R .fuse -R .lock -R .signature -O ihex EXTI_Driver.elf  "EXTI_Driver.hex"
+Finished building: EXTI_Driver.hex
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 EXTI_Driver.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    8336 bytes (25.4% Full)
+(.text + .data + .bootloader)
+
+Data:         24 bytes (1.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+15:17:28 Build Finished (took 792ms)
+

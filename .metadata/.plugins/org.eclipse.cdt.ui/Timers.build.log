@@ -1,0 +1,20 @@
+23:24:37 **** Incremental Build of configuration Debug for project Timers ****
+make all 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 Timers.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    9790 bytes (29.9% Full)
+(.text + .data + .bootloader)
+
+Data:         52 bytes (2.5% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+23:24:37 Build Finished (took 240ms)
+

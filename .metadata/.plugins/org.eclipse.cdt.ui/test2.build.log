@@ -1,0 +1,16 @@
+23:38:10 **** Incremental Build of configuration Debug for project test2 ****
+make all 
+Building file: ../main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"main.d" -MT"main.o" -c -o "main.o" "../main.c"
+In file included from ../main.c:1:
+../LCD.h:11: error: expected ')' before 'A_u8Cmd'
+../LCD.h:12: error: expected ')' before 'A_u8Data'
+../LCD.h:14: error: expected ')' before 'A_u8Row'
+../main.c: In function 'main':
+../main.c:10: warning: implicit declaration of function 'HLCD_voidSendString'
+../main.c:13: warning: implicit declaration of function 'ultra_triger'
+make: *** [main.o] Error 1
+
+23:38:10 Build Finished (took 344ms)
+

@@ -1,0 +1,48 @@
+#include <avr/io.h>
+
+#include <util/delay.h>
+
+// Function to initialize PWM for servo motor control
+void PWM_init() {
+    // Set fast PWM mode with non-inverted output
+    TCCR0 |= (1 << WGM00) | (1 << WGM01) | (1 << COM01) | (1 << CS00);
+
+    // Set the initial position to the middle (1500 microseconds)
+    OCR0 = 1500; // Adjust this value based on your servo's range
+}
+
+// Function to move the servo to a specific angle (0 to 180 degrees)
+void Servo_Move(uint8_t angle) {
+    // Calculate the appropriate pulse width
+    uint16_t pulse_width = (angle * 10) + 500; // Scale the angle to microseconds
+
+    // Set the pulse width by adjusting the OCR0 register
+    OCR0 = (pulse_width / 4) - 1; // Convert to the appropriate value for the servo
+
+    // Wait for the servo to reach the desired position
+    _delay_ms(500); // Adjust the delay as needed
+}
+
+int main() {
+    // Initialize PWM for servo control
+    PWM_init();
+
+    // Set PB3 (OC0 pin) as an output
+    DDRB |= (1 << PB3);
+
+    while (1) {
+//        // Move the servo to 0 degrees (fully counter-clockwise)
+//        Servo_Move(0);
+//        _delay_ms(2000);
+
+//        // Move the servo to 90 degrees (center position)
+//        Servo_Move(90);
+//        _delay_ms(2000);
+//
+//        // Move the servo to 180 degrees (fully clockwise)
+//        Servo_Move(180);
+//        _delay_ms(2000);
+//    }
+
+    return 0;
+}

@@ -1,0 +1,20 @@
+23:44:50 **** Incremental Build of configuration Debug for project LCD ****
+make all 
+Building file: ../APP/main.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"APP/main.d" -MT"APP/main.o" -c -o "APP/main.o" "../APP/main.c"
+In file included from ../APP/main.c:1:
+../APP/../HAL/LCD/LCD.h:28: error: expected ')' before 'A_u8Cmd'
+../APP/../HAL/LCD/LCD.h:29: error: expected ')' before 'A_u8Data'
+../APP/../HAL/LCD/LCD.h:31: error: expected ')' before 'A_u8Row'
+In file included from ../APP/main.c:3:
+../APP/../MCAL/EXTI/EXTI_Interface.h:11: error: expected ')' before 'A_u8ExtiNumber'
+../APP/../MCAL/EXTI/EXTI_Interface.h:12: error: expected ')' before 'A_u8ExtiNumber'
+../APP/../MCAL/EXTI/EXTI_Interface.h:13: error: expected ')' before 'A_u8ExtiNumber'
+../APP/main.c: In function 'main':
+../APP/main.c:9: warning: implicit declaration of function 'ultrasonic_init'
+../APP/main.c:15: warning: implicit declaration of function 'ultra_triger'
+make: *** [APP/main.o] Error 1
+
+23:44:51 Build Finished (took 290ms)
+

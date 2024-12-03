@@ -1,0 +1,52 @@
+#include "../HAL/LCD/LCD.h"
+#include  "../HAL/ULTRASONIC/ultrasonic.h"
+#include "../MCAL/EXTI/EXTI_Interface.h"
+#include "../MCAL/GIE/GIE_Interface.h"
+#include<avr/interrupt.h>
+
+int main(){
+
+HLCD_voidInit();
+HSNC_voidInit();
+//HSNC_voidInit();
+MGIE_voidEnable();
+
+HLCD_voidSendString("Distance is ");
+_delay_ms(10);
+while(1){
+HSNC_voidTrigger();
+_delay_ms(15);
+}
+
+  return 0;
+}
+
+
+ISR(INT1_vect){
+  if(sensor_working==1){
+    if(rising_edge==0){
+      TCNT0=0x00;
+      rising_edge=1;
+      timer_counter=0;
+    }
+  else{
+    distance=(timer_counter*256+TCNT0)/466;
+    HLCD_voidGoTo(1,0);
+  	itoa(distance,distance_str,10);
+  	strcat(distance_str, " cm ");
+  	HLCD_voidSendString(distance_str);
+  	_delay_ms(40);
+    timer_counter=0;
+    rising_edge=0;
+  }
+}}
+
+ISR(TIMER0_OVF_vect){
+    timer_counter++;
+    if(timer_counter >730){
+      TCNT0=0x00;
+      sensor_working=0;
+      rising_edge=0;
+      timer_counter=0;
+    }
+}

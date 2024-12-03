@@ -1,0 +1,123 @@
+#include <avr/io.h>
+#include <util/delay.h>
+#include "../I2C/I2C_Interface.h"
+
+#define EEPROM_ADDRESS 0b10100000 // EEPROM device address (24AA08)
+
+void EEPROM_Init() {
+    // EEPROM initialization code can be added here if needed
+}
+
+TWI_ErrStatus EEPROM_WriteByte(uint16_t address, uint8_t data) {
+    TWI_ErrStatus errorState = NoError;
+
+    // Send start condition
+    if (MTWI_SendStartCondition() != NoError) {
+        errorState = StartConditionErr;
+    }
+
+    // Send slave address with write operation
+    if (MTWI_SendSlaveAdderssWithWrite(EEPROM_ADDRESS) != NoError) {
+        errorState = SlaveAdderssWithWriteErr;
+    }
+
+    // Send high-byte of memory address
+    if (MTWI_MasterWriteDataByte((uint8_t)(address >> 8)) != NoError) {
+        errorState = MasterWriteDataErr;
+    }
+
+    // Send low-byte of memory address
+    if (MTWI_MasterWriteDataByte((uint8_t)address) != NoError) {
+        errorState = MasterWriteDataErr;
+    }
+
+    // Write data to EEPROM
+    if (MTWI_MasterWriteDataByte(data) != NoError) {
+        errorState = MasterWriteDataErr;
+    }
+
+    // Send stop condition
+    MTWI_voidSendStopCondition();
+
+    // Wait for EEPROM write cycle to complete (5 ms maximum)
+    _delay_ms(5);
+
+    return errorState;
+}
+
+TWI_ErrStatus EEPROM_ReadByte(u16 address, u8 *data) {
+    TWI_ErrStatus errorState = NoError;
+
+    // Send start condition
+    if (MTWI_SendStartCondition() != NoError) {
+        errorState = StartConditionErr;
+    }
+
+    // Send slave address with write operation
+    if (MTWI_SendSlaveAdderssWithWrite(EEPROM_ADDRESS) != NoError) {
+        errorState = SlaveAdderssWithWriteErr;
+    }
+
+    // Send high-byte of memory address
+    if (MTWI_MasterWriteDataByte((uint8_t)(address >> 8)) != NoError) {
+        errorState = MasterWriteDataErr;
+    }
+
+    // Send low-byte of memory address
+    if (MTWI_MasterWriteDataByte((uint8_t)address) != NoError) {
+        errorState = MasterWriteDataErr;
+    }
+
+    // Send repeated start condition
+    if (MTWI_SendStartCondition() != NoError) {
+        errorState = StartConditionErr;
+    }
+
+    // Send slave address with read operation
+    if (MTWI_SendSlaveAdderssWithRead(EEPROM_ADDRESS) != NoError) {
+        errorState = SlaveAdderssWithReadErr;
+    }
+
+    // Read data from EEPROM
+    if (MTWI_MasterReadDataByte(data, 0) != NoError) {
+        errorState = MasterReadDataErr;
+    }
+
+    // Send stop condition
+    MTWI_voidSendStopCondition();
+
+    return errorState;
+}
+
+
+
+//uint8_t EEPROM_Read(uint16_t address) {
+//    uint8_t data;
+//
+//    // Start condition
+//    TWI_Start();
+//
+//    // Send the EEPROM device address and write operation (with ACK)
+//    TWI_Write((EEPROM_ADDRESS << 1) | 0x00);
+//
+//    // Send the high-byte of the memory address
+//    TWI_Write((uint8_t)(address >> 8));
+//
+//    // Send the low-byte of the memory address
+//    TWI_Write((uint8_t)address);
+//
+//    // Repeat Start condition
+//    TWI_RepeatedStart();
+//
+//    // Send the EEPROM device address and read operation (with ACK)
+//    TWI_Write((EEPROM_ADDRESS << 1) | 0x01);
+//
+//    // Read data from EEPROM (with NACK)
+//    data = TWI_ReadNACK();
+//
+//    // Stop condition
+//    TWI_Stop();
+//
+//    return data;
+//}
+

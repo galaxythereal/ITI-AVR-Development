@@ -1,0 +1,29 @@
+15:32:58 **** Incremental Build of configuration Debug for project interrupts ****
+make all 
+Building file: ../MCAL/Interrupts/interruptsProgram.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=8000000UL -MMD -MP -MF"MCAL/Interrupts/interruptsProgram.d" -MT"MCAL/Interrupts/interruptsProgram.o" -c -o "MCAL/Interrupts/interruptsProgram.o" "../MCAL/Interrupts/interruptsProgram.c"
+In file included from ../MCAL/Interrupts/interruptsProgram.c:11:
+../MCAL/Interrupts/../DIO/DIO_Interface.h:9: error: expected ')' before 'A_u8PortNumber'
+../MCAL/Interrupts/../DIO/DIO_Interface.h:12: error: expected ')' before 'A_u8PortNumber'
+../MCAL/Interrupts/../DIO/DIO_Interface.h:14: error: expected ')' before 'A_u8PortNumber'
+../MCAL/Interrupts/../DIO/DIO_Interface.h:16: error: expected ')' before 'A_u8PortNumber'
+../MCAL/Interrupts/../DIO/DIO_Interface.h:18: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'MDIO_u8GetPinValue'
+../MCAL/Interrupts/interruptsProgram.c: In function 'INT0_Init':
+../MCAL/Interrupts/interruptsProgram.c:19: warning: implicit declaration of function 'MDIO_voidSetPinDirection'
+../MCAL/Interrupts/interruptsProgram.c:19: error: 'INPUT' undeclared (first use in this function)
+../MCAL/Interrupts/interruptsProgram.c:19: error: (Each undeclared identifier is reported only once
+../MCAL/Interrupts/interruptsProgram.c:19: error: for each function it appears in.)
+../MCAL/Interrupts/interruptsProgram.c:20: warning: implicit declaration of function 'MDIO_voidSetPinValue'
+../MCAL/Interrupts/interruptsProgram.c:20: error: 'HIGH' undeclared (first use in this function)
+../MCAL/Interrupts/interruptsProgram.c: In function '__vector_1':
+../MCAL/Interrupts/interruptsProgram.c:35: error: 'OUTPUT' undeclared (first use in this function)
+../MCAL/Interrupts/interruptsProgram.c:36: error: 'HIGH' undeclared (first use in this function)
+../MCAL/Interrupts/interruptsProgram.c:37: warning: implicit declaration of function '_delay_ms'
+../MCAL/Interrupts/interruptsProgram.c:38: error: 'LOW' undeclared (first use in this function)
+../MCAL/Interrupts/interruptsProgram.c: In function 'main':
+../MCAL/Interrupts/interruptsProgram.c:42: warning: implicit declaration of function 'MDIO_voidSetPortDirection'
+make: *** [MCAL/Interrupts/interruptsProgram.o] Error 1
+
+15:32:58 Build Finished (took 224ms)
+

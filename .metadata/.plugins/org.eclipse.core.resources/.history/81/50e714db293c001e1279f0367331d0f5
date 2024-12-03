@@ -1,0 +1,10 @@
+/*
+ * sevenSegment.c
+ *
+ *  Created on: Aug 16, 2023
+ *      Author: Mahmoud Ezzat
+ */
+#include"sevenSegment.h"
+#include<avr/io.h>
+
+

@@ -1,0 +1,2 @@
+MCAL/TIMERS/TIMER_Program.o MCAL/TIMERS/TIMER_Program.o:  \
+ ../MCAL/TIMERS/TIMER_Program.c
